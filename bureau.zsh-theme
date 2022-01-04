@@ -110,7 +110,7 @@ get_space () {
   echo $SPACES
 }
 
-_1LEFT="$_USERNAME $_PATH"
+_1LEFT="$_PATH"
 _1RIGHT="[%*] "
 
 bureau_precmd () {
@@ -119,8 +119,12 @@ bureau_precmd () {
   print -rP "$_1LEFT$_1SPACES$_1RIGHT"
 }
 
+last_status () {
+  echo "%(?:%{$fg[green]%}:%{$fg[red]%})"
+}
+
 setopt prompt_subst
-PROMPT='> $_LIBERTY '
+PROMPT='$(last_status)\$%{$reset_color%} '
 RPROMPT='$(bureau_git_prompt)$(kube_ps1)'
 
 autoload -U add-zsh-hook
